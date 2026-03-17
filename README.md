@@ -1,18 +1,17 @@
-# SRE Observability Lab
+# Laboratorio SRE
 
-Practical observability project using Prometheus, Grafana and Node Exporter in a Linux environment containerized with Docker.
-
----
-
-## Objective
-
-Implement a monitoring stack to simulate real infrastructure observability scenarios commonly used in DevOps and Site Reliability Engineering environments.
+Projeto prático de observabilidade utilizando Prometheus, Grafana e Node Exporter em um ambiente Linux conteinerizado com Docker.
 
 ---
 
-## Technologies Used
+## Objetivo
 
-* Linux Ubuntu Server
+Implementar conjunto de ferramentas de monitoramento para simular cenarios que possa encontrar no dia a dia na observabilidade de infraestrutura em abientes como Devops ou SRE.
+---
+
+## Tecnologias 
+
+* Linux Ubuntu
 * Docker
 * Prometheus
 * Grafana
@@ -20,26 +19,26 @@ Implement a monitoring stack to simulate real infrastructure observability scena
 
 ---
 
-## Architecture
+## Arquitetura
 
 Linux Host → Node Exporter → Prometheus → Grafana
 
 ---
 
-## Project Structure
+## Estrutura do Projeto
 
-sre-observability-lab/
+Lab-Observabilidade-SRE/
 │── README.md
 │── prometheus/
 │   └── prometheus.yml
 │── screenshots/
 │   └── dashboard.png
-│── alerts/
-│   └── future-alert-rules.yml
+│── alertas/
+│   └── Alertas futuros.yml
 
 ---
 
-## Prometheus Configuration
+## Configuraçoes que foram usadas no Grafana
 
 ```yaml
 global:
@@ -53,27 +52,25 @@ scrape_configs:
 
 ---
 
-## Running the Environment
-
-### Create Docker network
+### Criando a rede do Docker
 
 ```bash
 docker network create monitoring
 ```
 
-### Run Prometheus
+### Prometheus
 
 ```bash
 docker run -d --name prometheus -p 9090:9090 -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml --network monitoring prom/prometheus
 ```
 
-### Run Node Exporter
+### Node Exporter
 
 ```bash
 docker run -d --name node-exporter -p 9100:9100 --network monitoring prom/node-exporter
 ```
 
-### Run Grafana
+### Grafana
 
 ```bash
 docker run -d --name grafana -p 3000:3000 --network monitoring grafana/grafana
@@ -81,7 +78,7 @@ docker run -d --name grafana -p 3000:3000 --network monitoring grafana/grafana
 
 ---
 
-## Dashboard Import
+## Dashboard 
 
 Grafana Dashboard ID:
 
@@ -89,7 +86,9 @@ Grafana Dashboard ID:
 
 ---
 
-## Stress Test
+Após a implantação da estrutura, realizei um teste de estresse para validar o funcionamento do contêiner e a eficácia do monitoramento.
+
+## Teste de Estresse
 
 Generate CPU load:
 
@@ -105,22 +104,25 @@ stress --vm 2 --vm-bytes 512M --timeout 60
 
 ---
 
-## Dashboard Evidence
+## Evidencias
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/Dashboard.jpeg)
 
----
 
-## Next Steps
 
-* Create CPU alerts
-* Configure email notifications
-* Simulate incidents
-* Add centralized logging
+![Dashboard](screenshots/Stress.jpeg)
 
 ---
 
-## Learning Focus
+## Proximos passos
+
+* Criar Alertas de CPU
+* Configurar notificações por Email 
+* Simular Incidentes
+
+---
+
+## Foco da aprendizagem
 
 * Observability
 * Monitoring
